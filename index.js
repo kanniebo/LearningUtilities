@@ -1,4 +1,4 @@
-// Vanilla JavaScript implementation for Learning Utilities
+// Vanilla JavaScript implementation for Free Class Time
 // Maps data from the SwarmIntelli CDN structure.
 
 let allGames = [];
