@@ -19,12 +19,27 @@ async function init() {
     try {
         const response = await fetch('./games.json');
         if (!response.ok) throw new Error('Failed to load games data');
-        allGames = await response.json();
+        const data = await response.json();
+        
+        // Handle cases where data might be wrapped in an object or property
+        if (Array.isArray(data)) {
+            allGames = data;
+        } else if (data.games && Array.isArray(data.games)) {
+            allGames = data.games;
+        } else if (data.data && Array.isArray(data.data)) {
+            allGames = data.data;
+        } else {
+            allGames = [data]; // Single object case
+        }
+
         filteredGames = [...allGames];
         renderGames();
     } catch (error) {
         console.error('Initialization Error:', error);
-        gamesGrid.innerHTML = `<p class="col-span-full text-center text-red-400 py-12">Failed to load content. Please check your connection.</p>`;
+        gamesGrid.innerHTML = `<div class="col-span-full text-center py-12">
+            <p class="text-red-400 font-bold">Failed to load content.</p>
+            <p class="text-slate-500 text-sm mt-2">Please ensure games.json is valid and accessible.</p>
+        </div>`;
     }
 }
 
@@ -40,11 +55,14 @@ function renderGames() {
     }
 
     filteredGames.forEach(game => {
+        if (!game) return;
+        
         const card = document.createElement('div');
         card.className = "group relative bg-slate-900/40 rounded-3xl overflow-hidden border border-white/5 hover:border-indigo-500/50 transition-all duration-500 cursor-pointer flex flex-col hover:-translate-y-2 hover:shadow-2xl";
         
-        const thumb = game.game_image_icon || 'https://images.unsplash.com/photo-1550745679-361093f4955b?auto=format&fit=crop&q=80&w=600';
-        const title = game.game_title || 'Untitled Module';
+        // Robust property mapping for different JSON structures
+        const title = game.game_title || game.title || game.name || 'Untitled Game';
+        const thumb = game.game_image_icon || game.image || game.thumb || game.thumbnail || 'https://images.unsplash.com/photo-1550745679-361093f4955b?auto=format&fit=crop&q=80&w=600';
 
         card.innerHTML = `
             <div class="relative aspect-[4/3] overflow-hidden">
@@ -61,34 +79,49 @@ function renderGames() {
     });
 }
 
-// Search functionality
-searchInput.addEventListener('input', (e) => {
-    const query = e.target.value.toLowerCase().trim();
-    filteredGames = allGames.filter(game => 
-        (game.game_title && game.game_title.toLowerCase().includes(query))
-    );
-    renderGames();
-});
+// Safer URL extraction from iframe strings
+function extractIframeUrl(source) {
+    if (!source) return '';
+    const trimmed = source.trim();
+    
+    // If it's already just a URL
+    if (trimmed.startsWith('http')) return trimmed;
+    
+    // If it's an iframe tag, use a temporary DOM element to parse it
+    try {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(trimmed, 'text/html');
+        const iframe = doc.querySelector('iframe');
+        return iframe ? iframe.getAttribute('src') : '';
+    } catch (e) {
+        console.warn('Failed to parse iframe string:', e);
+        // Fallback to simple regex if DOMParser fails
+        const match = trimmed.match(/src=["']([^"']+)["']/i);
+        return match ? match[1] : '';
+    }
+}
 
 // Modal Logic
 function openGame(game) {
-    modalTitle.textContent = game.game_title;
-    let targetSource = game.iframe;
+    const title = game.game_title || game.title || game.name || 'Game';
+    modalTitle.textContent = title;
     
-    // Clear previous content
-    gameIframe.removeAttribute('srcdoc');
+    const targetSource = game.iframe || game.url || game.link;
+    const url = extractIframeUrl(targetSource);
+    
+    // Reset iframe to clear any previous state
     gameIframe.src = 'about:blank';
-
-    if (targetSource.includes('<iframe')) {
-        const match = targetSource.match(/src=["']([^"']+)["']/);
-        if (match && match[1]) {
-            gameIframe.src = match[1];
-        } else {
-            // Fallback to srcdoc if no src attribute but it's an iframe string
-            gameIframe.srcdoc = targetSource;
-        }
+    
+    if (url) {
+        // Use a small delay to ensure 'about:blank' triggers before the new URL
+        setTimeout(() => {
+            gameIframe.src = url;
+        }, 10);
+    } else if (targetSource && targetSource.includes('<iframe')) {
+        // Fallback for weird strings that didn't parse a src but are definitely HTML
+        gameIframe.srcdoc = targetSource;
     } else {
-        gameIframe.src = targetSource;
+        console.error('No valid game source found:', game);
     }
     
     gameModal.classList.remove('hidden');
@@ -97,23 +130,36 @@ function openGame(game) {
 
 function closeGame() {
     gameModal.classList.add('hidden');
-    gameIframe.src = '';
-    gameIframe.removeAttribute('srcdoc');
+    gameIframe.src = 'about:blank';
     document.body.classList.remove('modal-active');
     
     if (document.fullscreenElement) {
-        document.exitFullscreen();
+        document.exitFullscreen().catch(() => {});
     }
 }
 
+// Search functionality
+searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase().trim();
+    filteredGames = allGames.filter(game => {
+        const title = (game.game_title || game.title || game.name || '').toLowerCase();
+        return title.includes(query);
+    });
+    renderGames();
+});
+
 // Fullscreen Trigger
 fullscreenBtn.addEventListener('click', () => {
-    if (gameIframe.requestFullscreen) {
-        gameIframe.requestFullscreen();
-    } else if (gameIframe.webkitRequestFullscreen) {
-        gameIframe.webkitRequestFullscreen();
-    } else if (gameIframe.msRequestFullscreen) {
-        gameIframe.msRequestFullscreen();
+    try {
+        if (gameIframe.requestFullscreen) {
+            gameIframe.requestFullscreen();
+        } else if (gameIframe.webkitRequestFullscreen) {
+            gameIframe.webkitRequestFullscreen();
+        } else if (gameIframe.msRequestFullscreen) {
+            gameIframe.msRequestFullscreen();
+        }
+    } catch (err) {
+        console.error('Fullscreen error:', err);
     }
 });
 
@@ -122,6 +168,13 @@ closeModalBtn.addEventListener('click', closeGame);
 
 gameModal.addEventListener('click', (e) => {
     if (e.target === gameModal) closeGame();
+});
+
+// Close modal on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !gameModal.classList.contains('hidden')) {
+        closeGame();
+    }
 });
 
 init();
