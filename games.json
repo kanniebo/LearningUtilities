@@ -1,67 +1,32 @@
-
 [
   {
-    "id": "1",
-    "title": "2048",
-    "description": "Combine tiles to reach the 2048 mark in this addictive logic puzzle.",
-    "category": "Logic",
-    "url": "https://play2048.co/",
-    "thumbnail": "https://images.unsplash.com/photo-1614332287897-cdc485fa562d?q=80&w=800&h=600&auto=format&fit=crop"
+    "game_title": "Slope",
+    "game_image_icon": "https://raw.githubusercontent.com/swarmintelli/Unblocked-Games-CDN/main/images/slope.png",
+    "iframe": "https://kdata1.com/2020/05/slope/"
   },
   {
-    "id": "2",
-    "title": "HexGL",
-    "description": "High-speed futuristic racing game built with WebGL.",
-    "category": "Skill",
-    "url": "https://hexgl.bkcore.com/play/",
-    "thumbnail": "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=800&h=600&auto=format&fit=crop"
+    "game_title": "Minecraft Classic",
+    "game_image_icon": "https://raw.githubusercontent.com/swarmintelli/Unblocked-Games-CDN/main/images/minecraft.png",
+    "iframe": "https://classic.minecraft.net/"
   },
   {
-    "id": "3",
-    "title": "Hextris",
-    "description": "Fast-paced puzzle game where you manage blocks on a hexagon.",
-    "category": "Classic",
-    "url": "https://hextris.io/",
-    "thumbnail": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&h=600&auto=format&fit=crop"
+    "game_title": "Basketball Stars",
+    "game_image_icon": "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&q=80&w=600",
+    "iframe": "<iframe src=\"https://script.google.com/macros/s/AKfycbwzYMDDcdDUAvEP7iO6OdRk-5_oUp6vYvDdyEEz8tTOzWi5y4-Qf3vQ6TBoZuc9UYVcLg/exec\"></iframe>"
   },
   {
-    "id": "4",
-    "title": "Sinuous",
-    "description": "Avoid red dots and stay alive as long as possible.",
-    "category": "Skill",
-    "url": "https://sinuousgame.com/",
-    "thumbnail": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&h=600&auto=format&fit=crop"
+    "game_title": "Bottle Flip",
+    "game_image_icon": "https://images.unsplash.com/photo-1597589827317-4c6d6e0a90bd?auto=format&fit=crop&q=80&w=600",
+    "iframe": "<iframe src=\"https://script.google.com/macros/s/AKfycbzwDflD6NVq9iPdEWsRyyI4iqR_k47P-BK4sn_vpYaZGsPJz3zDYRDy45azzYiPnYs/exec\"></iframe>"
   },
   {
-    "id": "5",
-    "title": "Cookie Clicker",
-    "description": "The ultimate idle game of baking endless cookies.",
-    "category": "Classic",
-    "url": "https://orteil.dashnet.org/cookieclicker/",
-    "thumbnail": "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?q=80&w=800&h=600&auto=format&fit=crop"
+    "game_title": "Smash Karts",
+    "game_image_icon": "https://images.unsplash.com/photo-1595113316349-9fa4ee24f884?auto=format&fit=crop&q=80&w=600",
+    "iframe": "<iframe src=\"https://script.google.com/macros/s/AKfycbyE1C_kxeomVoOLjpaXc2uAI7JdNgVhdQdePTZu9Sizwzj_imhaWnNmPSXm4w1v-SFs/exec\"></iframe>"
   },
   {
-    "id": "6",
-    "title": "Slope",
-    "description": "Roll down the slope for as long as you can without falling.",
-    "category": "Skill",
-    "url": "https://slopegame.online/",
-    "thumbnail": "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?q=80&w=800&h=600&auto=format&fit=crop"
-  },
-  {
-    "id": "7",
-    "title": "Little Alchemy 2",
-    "description": "Combine elements to discover new items and build the world.",
-    "category": "Logic",
-    "url": "https://littlealchemy2.com/",
-    "thumbnail": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=800&h=600&auto=format&fit=crop"
-  },
-  {
-    "id": "8",
-    "title": "Crossy Road",
-    "description": "Endless hopper game. Why did the chicken cross the road?",
-    "category": "Classic",
-    "url": "https://poki.com/en/g/crossy-road",
-    "thumbnail": "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=800&h=600&auto=format&fit=crop"
+    "game_title": "Merge Fellas Italian Brainrot",
+    "game_image_icon": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&q=80&w=600",
+    "iframe": "<iframe src=\"https://script.google.com/macros/s/AKfycbxKeACMsdA3N71Rk2wolGOxrBqYz9UXnTo0o_Z4nvyh-z0SjoPO5UnfTLQXgsZQey4a/exec\"></iframe>"
   }
 ]

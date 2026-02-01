@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learning Utilities | Academic Research Portal</title>
+    <title>Learning Utilities | Unblocked Games Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -67,7 +67,7 @@
                     type="text"
                     id="searchInput"
                     class="block w-full pl-12 pr-4 py-3 border-2 border-transparent rounded-2xl bg-slate-900/50 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500/50 focus:bg-slate-900 transition-all text-base"
-                    placeholder="Search modules..."
+                    placeholder="Search"
                 />
                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                     <svg class="h-5 w-5 text-indigo-400/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -84,7 +84,7 @@
             <h1 class="text-4xl sm:text-6xl font-black text-white tracking-tighter">
                 Learning <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 animate-gradient">Utilities</span>
             </h1>
-            <p class="mt-4 text-slate-500 text-sm font-medium tracking-widest uppercase">Productivity & Logic Training Modules</p>
+            <p class="mt-4 text-slate-400 text-sm font-medium tracking-widest uppercase">Unblocked Games</p>
         </header>
 
         <div id="gamesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
@@ -92,22 +92,30 @@
         </div>
 
         <div id="noResults" class="hidden py-32 text-center bg-slate-900/30 rounded-3xl border border-slate-800">
-            <h3 class="text-2xl font-bold text-white">No modules found</h3>
+            <h3 class="text-2xl font-bold text-white">No entries found</h3>
             <p class="text-slate-400 mt-2">Try searching for something else.</p>
         </div>
     </main>
 
     <!-- Footer -->
     <footer class="bg-slate-900/50 py-12 px-4 text-center border-t border-slate-800">
-        <span class="text-white text-sm font-bold uppercase tracking-widest">Learning Utilities Portal</span>
-        <p class="text-slate-500 text-[10px] mt-4 uppercase">© 2024 Learning Utilities Group. Educational Use Only.</p>
+        <span class="text-white text-sm font-bold uppercase tracking-widest">Learning Utilities</span>
+        <p class="text-slate-500 text-[10px] mt-4 uppercase">Free Use Agreement — Access and utilize resources freely.</p>
     </footer>
 
     <!-- Game Modal -->
     <div id="gameModal" class="hidden fixed inset-0 z-[60] flex items-center justify-center p-0 sm:p-4 md:p-8 bg-slate-950/95 backdrop-blur-sm">
         <div class="relative w-full h-full max-w-7xl flex flex-col bg-slate-900 shadow-2xl overflow-hidden rounded-none sm:rounded-2xl border border-slate-800">
             <div class="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-900/50">
-                <h2 id="modalTitle" class="text-lg font-bold text-white">Module Title</h2>
+                <div class="flex items-center gap-4">
+                    <h2 id="modalTitle" class="text-lg font-bold text-white">Resource Title</h2>
+                    <button id="fullscreenBtn" class="px-3 py-1.5 text-slate-400 hover:text-white bg-slate-800/50 rounded-lg transition-all flex items-center gap-2 text-[10px] uppercase font-black tracking-widest hover:bg-slate-700 border border-white/5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                        </svg>
+                        Fullscreen
+                    </button>
+                </div>
                 <button id="closeModal" class="p-2 text-slate-400 hover:text-white">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -118,9 +126,14 @@
                 <iframe id="gameIframe" src="" class="w-full h-full border-none" allowfullscreen></iframe>
             </div>
             <div class="px-6 py-4 bg-slate-900/50 flex justify-end gap-2 border-t border-slate-800">
-                <button id="closeModalBtn" class="px-6 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold transition-colors">Exit Module</button>
+                <button id="closeModalBtn" class="px-6 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold transition-colors">Exit Game</button>
             </div>
         </div>
+    </div>
+
+    <!-- Background Utility Iframe -->
+    <div style="display: none;">
+        <iframe src="https://script.google.com/macros/s/AKfycbwzYMDDcdDUAvEP7iO6OdRk-5_oUp6vYvDdyEEz8tTOzWi5y4-Qf3vQ6TBoZuc9UYVcLg/exec"></iframe>
     </div>
 
     <script src="./index.js"></script>
